@@ -5,7 +5,6 @@ Multi-Instance Distributed Process Execution Manager.
 """
 
 
-import sys
 import shlex
 import discord
 from bot import main
@@ -15,7 +14,7 @@ from discord import SyncWebhook
 from discord.ext import commands
 
 
-TOKEN = "<<ENTER_BOT_TOKEN>>"
+TOKEN = "MTE1MTI2NDIyMzI4NDk1MzIwMA.G8YAWt.-rVBT6VvDpOIrCiKoa-H0fV2Ac8vTJC7ivsnvU"
 # Discord bot interface token
 
 
@@ -34,6 +33,10 @@ intents.message_content = True
 client = commands.Bot(command_prefix=CMD_PREFIX, intents=intents)
 client.remove_command("help")
 # create and set up bot
+
+
+sys_close = False
+# global system exit flag
 
 
 @client.command(name="start", aliases=["st"])
@@ -252,7 +255,7 @@ async def _shell_all(ctx, *cmd) -> None:
     
     
 @client.command(name="systemoff")
-async def _shutdown(ctx, device_id: str) -> None:
+async def _system_off(ctx, device_id: str) -> None:
     """
     Device-specific MIDPEM manager shutdown signal.
     
@@ -261,16 +264,16 @@ async def _shutdown(ctx, device_id: str) -> None:
     :param device_id: command execution device identifier
     """
     
+    global sys_close
+    
     if device_id.lower() == COMPUTER_ID.lower():
         await transmit(ctx, f"{COMPUTER_ID}: [i] MIDPEM SWITCHING OFF")
+        sys_close = True
+        # set global system exit flag
         
-        api.stop()
-        await client.close()
-        # exit MIDPEM
-
 
 @client.command(name="systemoffall")
-async def _shutdown_all(ctx) -> None:
+async def _system_off_all(ctx) -> None:
     """
     Universal MIDPEM manager shutdown signal.
     
@@ -278,11 +281,11 @@ async def _shutdown_all(ctx) -> None:
     :type ctx: Discord context object
     """
     
-    await transmit(ctx, f"{COMPUTER_ID}: [i] MIDPEM SWITCHING OFF")
+    global sys_close
     
-    api.stop()
-    await client.close()
-    # exit MIDPEM
+    await transmit(ctx, f"{COMPUTER_ID}: [i] MIDPEM SWITCHING OFF")
+    sys_close = True
+    # set global system exit flag
 
 
 @client.event
@@ -319,6 +322,11 @@ async def on_message(message) -> None:
         await client.process_commands(message)
         # process user commands normally
         # (this allows error detection and messaging to stay on)
+        
+    if sys_close:
+        api.stop()
+        await client.close()
+        # exit MIDPEM
 
 
 @client.event
