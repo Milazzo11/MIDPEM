@@ -15,7 +15,7 @@ from discord import SyncWebhook
 from discord.ext import commands
 
 
-TOKEN = "MTE1MTI2NDIyMzI4NDk1MzIwMA.GfdZQ3.6UFavcd1Hl9pFxO4wTJlCAf6xMq2Kw89kwCvF8"
+TOKEN = "<<ENTER_BOT_TOKEN>>"
 # Discord bot interface token
 
 
@@ -251,7 +251,7 @@ async def _shell_all(ctx, *cmd) -> None:
     await transmit(ctx, res % COMPUTER_ID)
     
     
-@client.command(name="shutdown")
+@client.command(name="systemoff")
 async def _shutdown(ctx, device_id: str) -> None:
     """
     Device-specific MIDPEM manager shutdown signal.
@@ -262,11 +262,14 @@ async def _shutdown(ctx, device_id: str) -> None:
     """
     
     if device_id.lower() == COMPUTER_ID.lower():
-        await transmit(ctx, f"{COMPUTER_ID}: MIDPEM SHUTTING DOWN")
+        await transmit(ctx, f"{COMPUTER_ID}: [i] MIDPEM SWITCHING OFF")
+        
+        api.stop()
         sys.exit(0)
+        # exit MIDPEM
 
 
-@client.command(name="shutdownall")
+@client.command(name="systemoffall")
 async def _shutdown_all(ctx) -> None:
     """
     Universal MIDPEM manager shutdown signal.
@@ -275,8 +278,11 @@ async def _shutdown_all(ctx) -> None:
     :type ctx: Discord context object
     """
     
-    await transmit(ctx, f"{COMPUTER_ID}: MIDPEM SHUTTING DOWN")
+    await transmit(ctx, f"{COMPUTER_ID}: [i] MIDPEM SWITCHING OFF")
+    
+    api.stop()
     sys.exit(0)
+    # exit MIDPEM
 
 
 @client.event
