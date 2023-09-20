@@ -344,7 +344,7 @@ async def on_command_error(ctx, error) -> None:
 
 
 @client.event
-async def on_ready():
+async def on_ready() -> None:
     """
     Display console message on startup.
     """

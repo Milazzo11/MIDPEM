@@ -134,7 +134,7 @@ async def receive_file(ctx) -> str:
     
 def return_file(filenames: tuple) -> tuple:
     """
-    Fetches files from local system to return to remote controller.
+    Fetch files from local system to return to remote controller.
     
     :param filenames: filenames to fetch
     :return: command response message, fetched files

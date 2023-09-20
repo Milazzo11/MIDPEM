@@ -82,12 +82,12 @@ $shellall *[command]
 alias: $sla
 brief: used to execute shell commands on all bot connected devices
 
-$shutdown <device_id>
+$systemoff <device_id>
 ---------------------
 alias: NO ALIAS
-brief: used to shutdown MIDPEM on bot with given ID
+brief: used to switch off MIDPEM manager on bot with given ID
 
-$shutdownall
+$systemoffall
 ---------------------
 alias: NO ALIAS
-brief: used to shutdown MIDPEM on all bot connected devices
+brief: used to switch off MIDPEM manager on all bot connected devices
