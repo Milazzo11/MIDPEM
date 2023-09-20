@@ -265,7 +265,7 @@ async def _shutdown(ctx, device_id: str) -> None:
         await transmit(ctx, f"{COMPUTER_ID}: [i] MIDPEM SWITCHING OFF")
         
         api.stop()
-        sys.exit(0)
+        await client.close()
         # exit MIDPEM
 
 
@@ -281,7 +281,7 @@ async def _shutdown_all(ctx) -> None:
     await transmit(ctx, f"{COMPUTER_ID}: [i] MIDPEM SWITCHING OFF")
     
     api.stop()
-    sys.exit(0)
+    await client.close()
     # exit MIDPEM
 
 
