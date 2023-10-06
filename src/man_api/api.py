@@ -161,7 +161,7 @@ def return_file(filenames: tuple) -> tuple:
         # handle many matching files case
         
     except Exception as e:
-        return "%s: [!] file fetch failure\n" + str(e)
+        return "%s: [!] file fetch failure\n" + str(e), None
     
 
 def get_status() -> str:
