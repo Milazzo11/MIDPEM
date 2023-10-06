@@ -113,7 +113,9 @@ async def receive_file(ctx) -> str:
         # get command attachments
         
         for file in files:
-            filename = file.url.split("/")[-1]
+            base_filename = file.url.split("/")[-1]
+            filename = base_filename.split("?")[0]
+            # extract filename from URL
     
             if not filename in RESERVED_FILENAMES:
                 await file.save(filename)
