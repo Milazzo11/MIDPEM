@@ -202,3 +202,24 @@ def shell(cmd: tuple) -> str:
         
     except Exception as e:
         return "%s: [!] shell execution failure\n" + str(e)
+        
+        
+def shell_p(cmd: tuple) -> str:
+    """
+    Execute local shell command in process.
+    
+    :param cmd: command to run (passed as tuple containing command/arg info)
+    :return: command response message
+    """
+    
+    try:
+        parsed_cmd = " ".join(cmd)
+        # parse command tuple
+        
+        subprocess.Popen(shlex.split(parsed_cmd), shell=True)
+        # run command in new process
+        
+        return "%s: [i] SHELL PROCESS EXECUTED"
+        
+    except Exception as e:
+        return "%s: [!] shell process execution failure\n" + str(e)
