@@ -82,6 +82,18 @@ $shellall *[command]
 alias: $sla
 brief: used to execute shell commands on all bot connected devices
 
+$shellprocess <device_id> *[command]
+-----------------------------
+alias: $shellp, $slp
+brief: used to execute shell process on bot connected device with given ID
+       (unlike with "$shell" program will not halt to wait for a response)
+	  
+$shellprocessall *[command]
+-----------------------------
+alias: $shellpall, $shellpa, $slpa
+brief: used to execute shell process on all bot connected devices
+       (unlike with "$shellall" program will not halt to wait for a response)
+
 $systemoff <device_id>
 ---------------------
 alias: NO ALIAS
