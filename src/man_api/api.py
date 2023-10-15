@@ -127,7 +127,7 @@ async def receive_file(ctx) -> str:
             # return special message if all file saves were failed
             # (caused by files with reserved names being sent)
             
-        return f"%s: [✓] {', '.join(filenames)} saved"
+        return f"%s: [*] {', '.join(filenames)} saved"
         # format base response message and returns
         
     except Exception as e:
