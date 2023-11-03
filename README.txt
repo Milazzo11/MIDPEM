@@ -21,7 +21,8 @@ server, then run "man.py" on all desired remote controlled devices.
   will often throw a built-in Discord "rate limit" error -- this is unfortunately
   not something that can be avoided, and the recommended solution is to create
   auxiliary helper scripts to iterate through devices and execute individual
-  commands with built-in delay ]
+  commands with built-in delay; alternatively, multiple bot tokens can be
+  generated and used on the different systems to bypass the rate limit ]
 
 =========
 Commands:
