@@ -17,6 +17,12 @@ be terminated.
 To start the manager, edit the bot token and add a bot to controller Discord
 server, then run "man.py" on all desired remote controlled devices.
 
+[ NOTE: on larger distributed systems, using the "all devices" command variant
+  will often throw a built-in Discord "rate limit" error -- this is unfortunately
+  not something that can be avoided, and the recommended solution is to create
+  auxiliary helper scripts to iterate through devices and execute individual
+  commands with built-in delay ]
+
 =========
 Commands:
 =========
