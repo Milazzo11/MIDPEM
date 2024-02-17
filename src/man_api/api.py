@@ -111,11 +111,10 @@ async def receive_file(ctx) -> str:
         filenames = []
         files = ctx.message.attachments
         # get command attachments
-        
+
         for file in files:
-            base_filename = file.url.split("/")[-1]
-            filename = base_filename.split("?")[0]
-            # extract filename from URL
+            filename = file.filename
+            # extract filename
     
             if not filename in RESERVED_FILENAMES:
                 await file.save(filename)
