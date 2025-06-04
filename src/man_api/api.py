@@ -16,6 +16,11 @@ RESERVED_FILENAMES = ["bot.py", "man.py"]
 # list of files than cannot be replaced using "sendfile" command
 
 
+FORCE_TERMINATE = True
+# determines if processes will be forced terminated
+# (if False, it is assumed that the cleanup function will signal termination)
+
+
 processes = []
 # global variable to hold current active processes managed by program
 
@@ -45,10 +50,11 @@ def stop() -> str:
         if cleanup is not None:
             cleanup()
             # pre-termination clean-up
-    
-        for process in processes:
-            process.terminate()
-            # terminate active reported processes
+        
+        if FORCE_TERMINATE:
+            for process in processes:
+                process.terminate()
+                # terminate active reported processes
         
         if end is not None:        
             end()
