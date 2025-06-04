@@ -18,6 +18,10 @@ TOKEN = "<<INSERT_BOT_TOKEN>>"
 # Discord bot interface token
 
 
+START_ON_BOOT = False
+# initiate start bot process(es) command signal on MIDPEM boot
+
+
 CMD_PREFIX = "$"
 # command prefix
 
@@ -382,6 +386,10 @@ async def on_ready() -> None:
     """
     
     print("MIDPEM: [listener active]\n")
+
+    if START_ON_BOOT:
+        api.start(main)
+        # start on boot
 
     
 if __name__ == "__main__":
