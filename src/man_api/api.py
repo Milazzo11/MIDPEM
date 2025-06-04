@@ -30,7 +30,7 @@ cleanup = None
 
 
 end = None
-# stop command singla end function (run after processes are killed)
+# stop command signal end function (run after processes are killed)
 
 
 def stop() -> str:
